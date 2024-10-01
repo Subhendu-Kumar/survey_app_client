@@ -10,3 +10,13 @@ export const login = async (data: Data) => {
     throw error;
   }
 };
+
+export const register = async (data: Data) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/auth/signup`, data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
