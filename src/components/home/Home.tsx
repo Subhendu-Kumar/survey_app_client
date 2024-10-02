@@ -18,15 +18,25 @@ import {
   CardContent,
   CardDescription,
 } from "@/components/ui/card";
+import { User } from "@/config";
 import { useState } from "react";
 import { Button } from "../ui/button";
+import { Link } from "react-router-dom";
 import { FaPlus } from "react-icons/fa6";
 import { IoMdPeople } from "react-icons/io";
 import { BiSolidFoodMenu } from "react-icons/bi";
 import { CgMenuCheese, CgMenuGridR } from "react-icons/cg";
+import { v4 as uuidv4 } from "uuid";
 
-const Home = () => {
+interface HomeProps {
+  user: User;
+}
+
+const Home = ({ user }: HomeProps) => {
   const [isListView, setIsListView] = useState(false);
+  const userId = user?.user_id;
+  console.log(userId);
+  const formId = uuidv4();
 
   return (
     <div className="w-full h-auto">
@@ -34,12 +44,14 @@ const Home = () => {
         <h1 className="text-xl text-black font-sans font-normal">
           Start a new form
         </h1>
-        <button className="w-40 h-40 bg-white border-blue-500 border-2 rounded-lg flex justify-center items-center flex-col">
-          <FaPlus className="text-7xl text-purple-800" />
-          <p className="text-base text-black font-sans font-light">
-            Blank Form
-          </p>
-        </button>
+        <Link to={`/forms/create/${formId}`}>
+          <button className="w-40 h-40 bg-white border-blue-500 border-2 rounded-lg flex justify-center items-center flex-col">
+            <FaPlus className="text-7xl text-purple-800" />
+            <p className="text-base text-black font-sans font-light">
+              Blank Form
+            </p>
+          </button>
+        </Link>
       </div>
       <div className="w-full h-auto px-40 pt-10">
         <div className="w-full h-auto flex items-center justify-between">

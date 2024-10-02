@@ -22,14 +22,18 @@ import { FaEye, FaEyeSlash, FaSheetPlastic } from "react-icons/fa6";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { FaSync } from "react-icons/fa";
 
-const Navbar = () => {
+interface NavbarProps {
+  user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+}
+
+const Navbar = ({ user, setUser }: NavbarProps) => {
   const { toast } = useToast();
+  const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [user, setUser] = useState<User | null>(getUserData());
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
   const [isSignupDialogOpen, setIsSignupDialogOpen] = useState(false);
-  const [message, setMessage] = useState("");
   const {
     register: registerLogin,
     handleSubmit: handleSubmitLogin,
