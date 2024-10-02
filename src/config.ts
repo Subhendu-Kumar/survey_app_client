@@ -4,10 +4,10 @@ export const DEFAULT_OPTION_TITLE = "Option";
 export const DEFAULT_QUESTION_TITLE = "Question";
 export const DEFAULT_FORM_TITLE = "Untitled Form";
 export const BASE_URL = "http://localhost:5000/api/v1";
-export const DEFAULT_QUESTION_TYPE: QuestionType = "short-text";
+export const DEFAULT_QUESTION_TYPE: QuestionType = "short_text";
 export const DEFAULT_FORM_DESCRIPTION = "Add a description to your form";
 
-export type QuestionType = "short-text" | "paragraph" | "multiple-choice" | "";
+export type QuestionType = "short_text" | "paragraph" | "multiple_choice" | "";
 
 export interface Data {
   username?: string;

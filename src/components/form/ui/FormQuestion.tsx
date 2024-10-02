@@ -90,13 +90,13 @@ const FormQuestion: FC<FormQuestionProps> = ({
             onChange={(e) => handleTypeChange(e.target.value as QuestionType)}
             className="w-fit px-3 py-2 rounded-lg border border-gray-500 bg-purple-200"
           >
-            <option value="multiple-choice">Multiple Choice</option>
-            <option value="short-text">Short Text</option>
+            <option value="multiple_choice">Multiple Choice</option>
+            <option value="short_text">Short Text</option>
             <option value="paragraph">Paragraph</option>
           </select>
         )}
       </div>
-      {(question.type === "short-text" || question.type === "paragraph") && (
+      {(question.type === "short_text" || question.type === "paragraph") && (
         <div className="w-full h-auto mt-4 flex flex-col items-start justify-start gap-2">
           <div
             className={`${
@@ -104,13 +104,13 @@ const FormQuestion: FC<FormQuestionProps> = ({
             } h-auto flex items-center justify-start gap-2`}
           >
             <p className="w-full text-left p-1 text-lg font-sans font-medium text-gray-700 border-b border-gray-500">
-              {question.type === "short-text" && "short answer text"}
+              {question.type === "short_text" && "short answer text"}
               {question.type === "paragraph" && "long answer text"}
             </p>
           </div>
         </div>
       )}
-      {question.type === "multiple-choice" && (
+      {question.type === "multiple_choice" && (
         <div className="w-full h-auto mt-4 flex flex-col items-start justify-start gap-2">
           {options.map((option, index) => (
             <div

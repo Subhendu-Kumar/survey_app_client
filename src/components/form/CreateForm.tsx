@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { FaQuestion } from "react-icons/fa6";
 import SetQuestions from "./SetQuestions";
 import Responses from "./Responses";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const CreateForm = () => {
   const navigate = useNavigate();
@@ -22,6 +22,8 @@ const CreateForm = () => {
       }
     }
   }, [tab, navigate, location.pathname]);
+  
+  const { id } = useParams<{ id: string }>();
 
   return (
     <div className="w-full h-auto px-56">
@@ -47,7 +49,7 @@ const CreateForm = () => {
           </button>
         </div>
       </div>
-      {tab === "set-questions" && <SetQuestions />}
+      {tab === "set-questions" && <SetQuestions formId={id!} />}
       {tab === "responses" && <Responses />}
     </div>
   );

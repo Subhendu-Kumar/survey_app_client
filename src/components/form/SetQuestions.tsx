@@ -11,7 +11,7 @@ import {
   DEFAULT_FORM_DESCRIPTION,
 } from "@/config";
 
-const SetQuestions = () => {
+const SetQuestions = ({ formId }: { formId: string }) => {
   const [form, setForm] = useState<Form>({
     title: "",
     description: "",
@@ -39,8 +39,6 @@ const SetQuestions = () => {
     }));
   }, [title, description, questions]);
 
-  console.log(form);
-
   const handleQuestionChange = (index: number, updatedQuestion: Question) => {
     const updatedQuestions = [...questions];
     updatedQuestions[index] = updatedQuestion;
@@ -63,6 +61,9 @@ const SetQuestions = () => {
     const updatedQuestions = questions.filter((_, i) => i !== index);
     setQuestions(updatedQuestions);
   };
+
+  console.log(form);
+  console.log(formId);
 
   return (
     <div className="w-full h-auto mt-10 flex items-center justify-center flex-col gap-6">
