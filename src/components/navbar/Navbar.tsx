@@ -112,19 +112,19 @@ const Navbar = () => {
       {user ? (
         <div>
           <Popover>
-            <PopoverTrigger className="w-fit px-3 py-1 border border-gray-800 rounded-md flex items-center justify-center gap-2 text-base font-semibold hover:bg-gray-300 bg-transparent transition-all duration-300 ease-in-out">
+            <PopoverTrigger className="w-fit px-3 py-1 border border-gray-800 rounded-md flex items-center justify-center gap-2 text-base font-semibold hover:bg-gray-300 bg-transparent transition-all duration-300 ease-in-out capitalize">
               {user.username}
               <IoMdArrowDropdown className="text-lg" />
             </PopoverTrigger>
             <PopoverContent
               align="center"
-              className="w-32 py-2 px-0 bg-gray-300 border border-gray-400 flex flex-col items-center justify-center gap-1"
+              className="w-32 py-2 px-0 bg-gray-200 border border-gray-400 flex flex-col items-center justify-center gap-1"
             >
-              <button className="w-full text-lg font-sans transition-all duration-300 ease-in-out font-semibold hover:scale-110">
+              <button className="w-full text-base font-sans transition-all duration-300 ease-in-out font-normal hover:scale-110">
                 Profile Page
               </button>
               <button
-                className="w-full text-lg font-sans transition-all duration-300 ease-in-out font-semibold hover:scale-110"
+                className="w-full text-base font-sans transition-all duration-300 ease-in-out font-normal hover:scale-110"
                 onClick={handleSignOut}
               >
                 Sign Out
