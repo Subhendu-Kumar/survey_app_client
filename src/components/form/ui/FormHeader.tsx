@@ -1,10 +1,20 @@
 import { useState } from "react";
-import { IoIosSave } from "react-icons/io";
 import { MdEdit } from "react-icons/md";
+import { IoIosSave } from "react-icons/io";
 
-const FormHeader = () => {
-  const [isTitleEditable, setIsTitleEditable] = useState(false);
-  const [isDescriptionEditable, setIsDescriptionEditable] = useState(false);
+const FormHeader = ({
+  title,
+  setTitle,
+  description,
+  setDescription,
+}: {
+  title: string;
+  description: string;
+  setTitle: (title: string) => void;
+  setDescription: (description: string) => void;
+}) => {
+  const [isTitleEditable, setIsTitleEditable] = useState<boolean>(false);
+  const [isDescriptionEditable, setIsDescriptionEditable] = useState<boolean>(false);
 
   return (
     <div className="w-full h-auto bg-purple-100 border-t-8 border-purple-600 rounded-xl p-6">
@@ -20,12 +30,13 @@ const FormHeader = () => {
             <input
               type="text"
               className="w-full h-full bg-transparent outline-none border border-gray-400 rounded-xl px-3 text-3xl font-sans font-semibold"
-              value="Form Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
             />
           </div>
         ) : (
           <p className="w-[95%] text-left text-4xl font-sans font-semibold">
-            Form Title
+            {title}
           </p>
         )}
       </button>
@@ -42,11 +53,12 @@ const FormHeader = () => {
             <input
               type="text"
               className="w-full h-full bg-transparent outline-none border border-gray-400 rounded-xl px-3 text-xl font-sans font-normal"
-              value="Form Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
         ) : (
-          <p className="text-xl font-sans font-normal">Form Description</p>
+          <p className="text-xl font-sans font-normal">{description}</p>
         )}
       </button>
     </div>

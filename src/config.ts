@@ -1,6 +1,13 @@
-export const BASE_URL = "http://localhost:5000/api/v1";
-export const USER_DATA_KEY = "userData";
 export const TOKEN_KEY = "token";
+export const USER_DATA_KEY = "userData";
+export const DEFAULT_OPTION_TITLE = "Option";
+export const DEFAULT_QUESTION_TITLE = "Question";
+export const DEFAULT_FORM_TITLE = "Untitled Form";
+export const BASE_URL = "http://localhost:5000/api/v1";
+export const DEFAULT_QUESTION_TYPE: QuestionType = "short-text";
+export const DEFAULT_FORM_DESCRIPTION = "Add a description to your form";
+
+export type QuestionType = "short-text" | "paragraph" | "multiple-choice" | "";
 
 export interface Data {
   username?: string;
@@ -18,4 +25,25 @@ export interface SignInResponse {
   message: string;
   token: string;
   user: User;
+}
+
+export interface Question {
+  id: number;
+  title: string;
+  type: QuestionType;
+  isRequired: boolean;
+  options?: string[];
+}
+
+export interface Form {
+  title: string;
+  description: string;
+  questions: Question[];
+}
+
+export interface FormQuestionProps {
+  question: Question;
+  onDelete: () => void;
+  addQuestion: () => void;
+  onChange: (question: Question) => void;
 }
