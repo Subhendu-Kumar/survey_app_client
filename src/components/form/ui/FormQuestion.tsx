@@ -18,7 +18,7 @@ const FormQuestion: FC<FormQuestionProps> = ({
 }) => {
   const ref = useRef(null);
   const [isEditable, setIsEditable] = useState<boolean>(false);
-  const [options, setOptions] = useState<string[]>([DEFAULT_OPTION_TITLE]);
+  // const [options, setOptions] = useState<string[]>([DEFAULT_OPTION_TITLE]);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -46,19 +46,34 @@ const FormQuestion: FC<FormQuestionProps> = ({
     onChange({ ...question, isRequired: checked });
   };
 
+  // const handleOptionChange = (index: number, value: string) => {
+  //   const newOptions = [...options];
+  //   newOptions[index] = value;
+  //   setOptions(newOptions);
+  //   onChange({ ...question, options: newOptions });
+  // };
+
   const handleOptionChange = (index: number, value: string) => {
-    const newOptions = [...options];
-    newOptions[index] = value;
-    setOptions(newOptions);
+    const newOptions = [...(question.options || [])]; // Access options from the question object
+    newOptions[index] = value; // Update the option at the given index
+    onChange({ ...question, options: newOptions }); // Pass updated question with new options to parent
+  };
+
+  // const addOption = () => {
+  //   setOptions((prev: string[]) => [...prev, DEFAULT_OPTION_TITLE]);
+  // };
+  const addOption = () => {
+    const newOptions = [...(question.options || []), DEFAULT_OPTION_TITLE];
     onChange({ ...question, options: newOptions });
   };
 
-  const addOption = () => {
-    setOptions((prev) => [...prev, DEFAULT_OPTION_TITLE]);
-  };
+  // const deleteOption = (index: number) => {
+  //   setOptions((prev) => prev.filter((_, i) => i !== index));
+  // };
 
   const deleteOption = (index: number) => {
-    setOptions((prev) => prev.filter((_, i) => i !== index));
+    const newOptions = (question.options || []).filter((_, i) => i !== index);
+    onChange({ ...question, options: newOptions });
   };
 
   return (
@@ -112,7 +127,7 @@ const FormQuestion: FC<FormQuestionProps> = ({
       )}
       {question.type === "multiple_choice" && (
         <div className="w-full h-auto mt-4 flex flex-col items-start justify-start gap-2">
-          {options.map((option, index) => (
+          {(question.options || []).map((option, index) => (
             <div
               key={index}
               className="w-full h-auto flex items-center justify-between gap-2"
@@ -121,7 +136,9 @@ const FormQuestion: FC<FormQuestionProps> = ({
                 <FaRegCircle className="text-lg" />
                 <input
                   type="text"
-                  className="w-full h-auto bg-transparent outline-none hover:border-b hover:border-gray-500 px-3 py-2"
+                  className={`w-full h-auto bg-transparent outline-none ${
+                    isEditable && "hover:border-b hover:border-gray-500"
+                  }  px-3 py-2`}
                   value={option}
                   onChange={(e) => handleOptionChange(index, e.target.value)}
                 />

@@ -11,6 +11,7 @@ import CreateForm from "./components/form/CreateForm";
 import { useEffect, useState } from "react";
 import { User } from "./config";
 import { getUserData } from "./utils";
+import PreviewForm from "./components/form/PreviewForm";
 
 const App = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/home" element={<Home user={user!} />} />
           <Route path="/forms/create/:id" element={<CreateForm />} />
+          <Route path="/forms/preview/:id" element={<PreviewForm />} />
         </Routes>
       </Router>
       <Toaster />

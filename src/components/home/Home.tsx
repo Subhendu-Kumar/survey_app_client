@@ -84,7 +84,7 @@ const Home = ({ user }: HomeProps) => {
             </TooltipProvider>
           </div>
         </div>
-        <div className="w-full h-auto mt-8">
+        <div className="w-full h-auto my-8">
           {isListView ? (
             <div className="w-full h-auto flex flex-col items-center justify-center gap-3">
               <div className="w-full h-14 rounded-full bg-transparent hover:bg-purple-100 transition-all duration-300 ease-in-out flex items-center justify-between px-6">

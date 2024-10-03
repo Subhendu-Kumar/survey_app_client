@@ -14,7 +14,8 @@ const FormHeader = ({
   setDescription: (description: string) => void;
 }) => {
   const [isTitleEditable, setIsTitleEditable] = useState<boolean>(false);
-  const [isDescriptionEditable, setIsDescriptionEditable] = useState<boolean>(false);
+  const [isDescriptionEditable, setIsDescriptionEditable] =
+    useState<boolean>(false);
 
   return (
     <div className="w-full h-auto bg-purple-100 border-t-8 border-purple-600 rounded-xl p-6">
