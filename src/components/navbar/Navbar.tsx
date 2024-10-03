@@ -12,7 +12,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { login, register } from "@/api";
-import { Data, User } from "@/config";
+import { Data, UserProps } from "@/config";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -22,12 +22,7 @@ import { FaEye, FaEyeSlash, FaSheetPlastic } from "react-icons/fa6";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { FaSync } from "react-icons/fa";
 
-interface NavbarProps {
-  user: User | null;
-  setUser: React.Dispatch<React.SetStateAction<User | null>>;
-}
-
-const Navbar = ({ user, setUser }: NavbarProps) => {
+const Navbar = ({ user, setUser }: UserProps) => {
   const { toast } = useToast();
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);

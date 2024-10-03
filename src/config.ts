@@ -28,7 +28,8 @@ export interface SignInResponse {
 }
 
 export interface Question {
-  id: number;
+  id?: number;
+  question_id?: string;
   title: string;
   type: QuestionType;
   isRequired: boolean;
@@ -36,6 +37,7 @@ export interface Question {
 }
 
 export interface Form {
+  form_id?: string;
   title: string;
   description: string;
   questions: Question[];
@@ -46,4 +48,9 @@ export interface FormQuestionProps {
   onDelete: () => void;
   addQuestion: () => void;
   onChange: (question: Question) => void;
+}
+
+export interface UserProps {
+  user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
 }

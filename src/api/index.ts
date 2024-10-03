@@ -44,3 +44,13 @@ export const createForm = async (formId: string, data: Form) => {
     throw error;
   }
 };
+
+export const getForm = async (formId: string) => {
+  try {
+    const response = await API.get(`/form/getdata/${formId}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};

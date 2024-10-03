@@ -81,6 +81,7 @@ const SetQuestions = ({ formId }: { formId: string }) => {
         setTitle={setTitle}
         description={description}
         setDescription={setDescription}
+        showEditButton={true}
       />
       {questions.map((question, idx) => {
         return (
