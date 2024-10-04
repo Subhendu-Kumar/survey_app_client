@@ -3,23 +3,6 @@ import SetQuestions from "./SetQuestions";
 import { useParams } from "react-router-dom";
 
 const CreateForm = () => {
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  // const queryParams = new URLSearchParams(location.search);
-  // const initialTab = queryParams.get("tab") || "set-questions";
-  // const [tab, setTab] = useState(initialTab);
-  // useEffect(() => {
-  //   const currentTab = queryParams.get("tab");
-  //   if (currentTab !== tab) {
-  //     queryParams.set("tab", tab);
-  //     if (currentTab !== tab) {
-  //       navigate(`${location.pathname}?${queryParams.toString()}`, {
-  //         replace: true,
-  //       });
-  //     }
-  //   }
-  // }, [tab, navigate, location.pathname]);
-
   const { id } = useParams<{ id: string }>();
 
   return (

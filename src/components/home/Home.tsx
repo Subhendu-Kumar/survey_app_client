@@ -18,25 +18,51 @@ import {
   CardContent,
   CardDescription,
 } from "@/components/ui/card";
-import { User } from "@/config";
-import { useState } from "react";
+import { FormUser, User } from "@/config";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaPlus } from "react-icons/fa6";
 import { IoMdPeople } from "react-icons/io";
 import { BiSolidFoodMenu } from "react-icons/bi";
 import { CgMenuCheese, CgMenuGridR } from "react-icons/cg";
 import { v4 as uuidv4 } from "uuid";
+import { getFormByUser } from "@/api";
+import moment from "moment";
+import ListViewSkeleton from "../skeletonLoaders/ListViewSkeleton";
+import CardViewSkeleton from "../skeletonLoaders/CardViewSkeleton";
 
 interface HomeProps {
   user: User;
 }
 
 const Home = ({ user }: HomeProps) => {
-  const [isListView, setIsListView] = useState(false);
+  const [isListView, setIsListView] = useState<boolean>(false);
+  const [formsData, setFormsData] = useState<FormUser[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const userId = user?.user_id;
   console.log(userId);
   const formId = uuidv4();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchFormsData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await getFormByUser();
+        setFormsData(response);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchFormsData();
+  }, [isListView]);
+
+  const handleClick = (form_id: string) => {
+    navigate(`/forms/preview/${form_id}`);
+  };
 
   return (
     <div className="w-full h-auto">
@@ -85,41 +111,91 @@ const Home = ({ user }: HomeProps) => {
           </div>
         </div>
         <div className="w-full h-auto my-8">
-          {isListView ? (
-            <div className="w-full h-auto flex flex-col items-center justify-center gap-3">
-              <div className="w-full h-14 rounded-full bg-transparent hover:bg-purple-100 transition-all duration-300 ease-in-out flex items-center justify-between px-6">
-                <div className="flex items-center justify-center gap-2">
-                  <BiSolidFoodMenu className="text-2xl text-purple-500" />
-                  <p className="text-lg font-sans font-semibold">Card Title</p>
-                </div>
-                <p className="text-sm font-normal font-sans">description</p>
-                <div className="flex items-center justify-center gap-4">
-                  <div className="flex items-center justify-center gap-1 leading-none">
-                    <IoMdPeople className="text-lg" />
-                    <p className="text-sm font-sans">Jun 20, 2024</p>
-                  </div>
-                  <Button>View</Button>
-                </div>
+          {isLoading ? (
+            isListView ? (
+              <div className="w-full h-auto flex flex-col items-center justify-center gap-3">
+                {[...Array(5)].map((_, idx) => {
+                  return <ListViewSkeleton key={idx} />;
+                })}
               </div>
+            ) : (
+              <div className="w-full h-auto grid grid-cols-3 gap-3">
+                {[...Array(5)].map((_, idx) => {
+                  return <CardViewSkeleton key={idx} />;
+                })}
+              </div>
+            )
+          ) : isListView ? (
+            <div className="w-full h-auto flex flex-col items-center justify-center gap-3">
+              {formsData.reverse().map((data, idx) => {
+                return (
+                  <div
+                    className="w-full h-14 rounded-full bg-transparent hover:bg-purple-100 transition-all duration-300 ease-in-out flex items-center justify-between px-6"
+                    key={idx}
+                  >
+                    <div className="flex items-center justify-center gap-2">
+                      <BiSolidFoodMenu className="text-2xl text-purple-500" />
+                      <p className="text-lg font-sans font-semibold">
+                        {data.title.length > 25
+                          ? data.title.substring(0, 25) + "..."
+                          : data.title}
+                      </p>
+                    </div>
+                    <p className="text-sm font-normal font-sans">
+                      {data.description.length > 30
+                        ? data.description.substring(0, 30) + "..."
+                        : data.description}
+                    </p>
+                    <div className="flex items-center justify-center gap-4">
+                      <div className="flex items-center justify-center gap-1 leading-none">
+                        <IoMdPeople className="text-lg" />
+                        <p className="text-sm font-sans">
+                          {moment(data.updated_at).format("MMM DD, YYYY")}
+                        </p>
+                      </div>
+                      <Button onClick={() => handleClick(data.form_id)}>
+                        View
+                      </Button>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           ) : (
             <div className="w-full h-auto grid grid-cols-3 gap-3">
-              <Card className="w-full h-auto border-gray-500 hover:border-purple-500">
-                <CardHeader>
-                  <CardTitle className="flex items-center justify-start gap-1">
-                    <BiSolidFoodMenu className="text-2xl text-purple-500" />
-                    Card Title
-                  </CardTitle>
-                  <CardDescription>Card Description</CardDescription>
-                </CardHeader>
-                <CardContent className="w-full h-auto flex items-center justify-between">
-                  <div className="flex items-center justify-center gap-1 leading-none">
-                    <IoMdPeople className="text-lg" />
-                    <p className="text-sm font-sans">Jun 20, 2024</p>
-                  </div>
-                  <Button>View</Button>
-                </CardContent>
-              </Card>
+              {formsData.reverse().map((data, idx) => {
+                return (
+                  <Card
+                    className="w-full h-auto border-gray-500 hover:border-purple-500"
+                    key={idx}
+                  >
+                    <CardHeader>
+                      <CardTitle className="flex items-center justify-start gap-1">
+                        <BiSolidFoodMenu className="text-2xl text-purple-500" />
+                        {data.title.length > 25
+                          ? data.title.substring(0, 25) + "..."
+                          : data.title}
+                      </CardTitle>
+                      <CardDescription>
+                        {data.description.length > 30
+                          ? data.description.substring(0, 30) + "..."
+                          : data.description}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="w-full h-auto flex items-center justify-between">
+                      <div className="flex items-center justify-center gap-1 leading-none">
+                        <IoMdPeople className="text-lg" />
+                        <p className="text-sm font-sans">
+                          {moment(data.updated_at).format("MMM DD, YYYY")}
+                        </p>
+                      </div>
+                      <Button onClick={() => handleClick(data.form_id)}>
+                        View
+                      </Button>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
           )}
         </div>

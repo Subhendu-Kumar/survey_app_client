@@ -184,7 +184,7 @@ const Navbar = ({ user, setUser }: UserProps) => {
                       },
                     })}
                   />
-                  <button
+                  <div
                     className="w-[10%] h-10 px-3 rounded-r-lg outline-none border-2 border-l-0 text-lg font-sans font-medium border-black flex items-center justify-center"
                     onClick={handleShowPassword}
                   >
@@ -193,7 +193,7 @@ const Navbar = ({ user, setUser }: UserProps) => {
                     ) : (
                       <FaEyeSlash className="text-xl" />
                     )}
-                  </button>
+                  </div>
                 </div>
                 {loginErrors.password && (
                   <p className="text-red-500 text-sm mt-1">
@@ -282,7 +282,7 @@ const Navbar = ({ user, setUser }: UserProps) => {
                       },
                     })}
                   />
-                  <button
+                  <div
                     className="w-[10%] h-10 px-3 rounded-r-lg outline-none border-2 border-l-0 text-lg font-sans font-medium border-black flex items-center justify-center"
                     onClick={handleShowPassword}
                   >
@@ -291,7 +291,7 @@ const Navbar = ({ user, setUser }: UserProps) => {
                     ) : (
                       <FaEyeSlash className="text-xl" />
                     )}
-                  </button>
+                  </div>
                 </div>
                 {signupErrors.password && (
                   <p className="text-red-500 text-sm mt-1">

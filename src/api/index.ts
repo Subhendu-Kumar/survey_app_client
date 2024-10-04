@@ -54,3 +54,13 @@ export const getForm = async (formId: string) => {
     throw error;
   }
 };
+
+export const getFormByUser = async () => {
+  try {
+    const response = await API.get(`/form/get`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};

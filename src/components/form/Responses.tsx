@@ -1,6 +1,6 @@
 const Responses = () => {
   return (
-    <div>Responses</div>
+    <div className="w-full h-auto text-center">Responses</div>
   )
 }
 

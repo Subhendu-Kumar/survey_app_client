@@ -54,3 +54,11 @@ export interface UserProps {
   user: User | null;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
 }
+
+export interface FormUser {
+  form_id: string;
+  title: string;
+  description: string;
+  updated_at: string;
+  is_active: boolean;
+}

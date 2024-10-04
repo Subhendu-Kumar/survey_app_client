@@ -41,35 +41,6 @@ const Layout = () => {
   );
 };
 
-// const App = () => {
-//   const [user, setUser] = useState<User | null>(null);
-//   const location = useLocation();
-//   const shouldShowNavbar = !location.pathname.startsWith("/forms/submission");
-
-//   useEffect(() => {
-//     setUser(getUserData());
-//   }, []);
-
-//   return (
-//     <div className="w-full min-h-screen">
-//       <Router>
-//         {shouldShowNavbar && <Navbar user={user} setUser={setUser} />}
-//         <Routes>
-//           <Route path="/" element={<Navigate to="/home" />} />
-//           <Route path="/home" element={<Home user={user!} />} />
-//           <Route path="/forms/create/:id" element={<CreateForm />} />
-//           <Route path="/forms/preview/:id" element={<PreviewForm />} />
-//           <Route
-//             path="/forms/submission/:id"
-//             element={<FormSubmissionWindow />}
-//           />
-//         </Routes>
-//       </Router>
-//       <Toaster />
-//     </div>
-//   );
-// };
-
 const App = () => {
   return (
     <Router>
