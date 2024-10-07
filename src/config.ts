@@ -27,13 +27,17 @@ export interface SignInResponse {
   user: User;
 }
 
+export interface Option {
+  option_id: string;
+  title: string;
+}
 export interface Question {
   id?: number;
   question_id?: string;
   title: string;
   type: QuestionType;
   isRequired: boolean;
-  options?: string[];
+  options?: Option[];
 }
 
 export interface Form {
@@ -61,4 +65,14 @@ export interface FormUser {
   description: string;
   updated_at: string;
   is_active: boolean;
+}
+
+export interface Answer {
+  question_id: string;
+  answer_text: string;
+}
+
+export interface Response {
+  form_id: string;
+  responses: Answer[];
 }

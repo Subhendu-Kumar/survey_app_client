@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL, Data, Form } from "../config";
+import { BASE_URL, Data, Form, Response } from "../config";
 import { getToken } from "@/utils";
 
 const API = axios.create({
@@ -64,3 +64,13 @@ export const getFormByUser = async () => {
     throw error;
   }
 };
+
+export const submitForm = async (data: Response) => {
+  try {
+    const response = await API.post("/form/submit", data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}

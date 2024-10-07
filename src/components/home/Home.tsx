@@ -127,7 +127,7 @@ const Home = ({ user }: HomeProps) => {
             )
           ) : isListView ? (
             <div className="w-full h-auto flex flex-col items-center justify-center gap-3">
-              {formsData.reverse().map((data, idx) => {
+              {[...formsData].reverse().map((data, idx) => {
                 return (
                   <div
                     className="w-full h-14 rounded-full bg-transparent hover:bg-purple-100 transition-all duration-300 ease-in-out flex items-center justify-between px-6"
@@ -163,7 +163,7 @@ const Home = ({ user }: HomeProps) => {
             </div>
           ) : (
             <div className="w-full h-auto grid grid-cols-3 gap-3">
-              {formsData.reverse().map((data, idx) => {
+              {[...formsData].reverse().map((data, idx) => {
                 return (
                   <Card
                     className="w-full h-auto border-gray-500 hover:border-purple-500"
