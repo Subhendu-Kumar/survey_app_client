@@ -40,6 +40,16 @@ export interface Question {
   options?: Option[];
 }
 
+interface Question2 {
+  question_id: string;
+  form_id: string;
+  question_text: string;
+  question_type: QuestionType;
+  is_required: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Form {
   form_id?: string;
   title: string;
@@ -68,11 +78,29 @@ export interface FormUser {
 }
 
 export interface Answer {
-  question_id: string;
-  answer_text: string;
+  response_answer_id?: string;
+  response_id?: string;
+  question_id?: string;
+  answer_text?: string;
+  option_id?: string | null;
 }
 
 export interface Response {
   form_id: string;
   responses: Answer[];
+}
+
+interface Response2 {
+  response_id: string;
+  form_id: string;
+  user_id: string;
+  submitted_at: string;
+  answers: Answer[];
+}
+
+export interface Results {
+  result: {
+    questions: Question2[];
+    responses: Response2[];
+  };
 }

@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { login, register } from "@/api";
 import { Data, UserProps } from "@/config";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { IoMdArrowDropdown, IoMdLogIn } from "react-icons/io";
@@ -24,6 +24,7 @@ import { FaSync } from "react-icons/fa";
 
 const Navbar = ({ user, setUser }: UserProps) => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -91,6 +92,7 @@ const Navbar = ({ user, setUser }: UserProps) => {
       description: "You have been logged out",
       duration: 3000,
     });
+    navigate("/");
   };
 
   useEffect(() => {

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import FormHeader from "./ui/FormHeader";
 import FormQuestion from "./ui/FormQuestion";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import { useToast } from "@/hooks/use-toast";
 import {
   Form,
   Question,
@@ -11,8 +12,19 @@ import {
   DEFAULT_FORM_DESCRIPTION,
 } from "@/config";
 import { createForm } from "@/api";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import savingLogo from "../../../public/saving.gif";
+import { useNavigate } from "react-router-dom";
 
 const SetQuestions = ({ formId }: { formId: string }) => {
+  const { toast } = useToast();
+  const navigate = useNavigate();
   const [form, setForm] = useState<Form>({
     title: "",
     description: "",
@@ -27,6 +39,7 @@ const SetQuestions = ({ formId }: { formId: string }) => {
     },
   ]);
   const [title, setTitle] = useState<string>(DEFAULT_FORM_TITLE);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [description, setDescription] = useState<string>(
     DEFAULT_FORM_DESCRIPTION
   );
@@ -64,13 +77,25 @@ const SetQuestions = ({ formId }: { formId: string }) => {
   };
 
   const handleCreateForm = async () => {
-    console.log(form);
-    console.log(formId);
+    setIsLoading(true);
     try {
       const response = await createForm(formId, form);
       console.log(response);
+      toast({
+        title: "Success",
+        description: "Form created successfully",
+        duration: 3000,
+      });
+      navigate(`/forms/preview/${formId}`);
     } catch (error) {
       console.error(error);
+      toast({
+        title: "Error",
+        description: "Failed to create form : Form with this Id alreadt exists",
+        duration: 3000,
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -112,6 +137,23 @@ const SetQuestions = ({ formId }: { formId: string }) => {
           Submit/Create
         </button>
       </div>
+      <AlertDialog open={isLoading} onOpenChange={setIsLoading}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Saving form data to server</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone.
+            </AlertDialogDescription>
+            <div className="w-full h-36 mt-6 flex items-center justify-center">
+              <img
+                src={savingLogo}
+                alt="saving"
+                className="w-full h-full object-contain object-center"
+              />
+            </div>
+          </AlertDialogHeader>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };

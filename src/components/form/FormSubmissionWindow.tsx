@@ -8,15 +8,15 @@ import { useParams } from "react-router-dom";
 import { getForm, submitForm } from "@/api";
 import FormQuestionSkeleton from "../skeletonLoaders/FormQuestionSkeleton";
 import FormHeaderSkeleton from "../skeletonLoaders/FormHeaderSkeleton";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import savingLogo from "../../../public/saving.gif";
 import { useToast } from "@/hooks/use-toast";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 const FormSubmissionWindow = () => {
   const { toast } = useToast();
@@ -148,17 +148,17 @@ const FormSubmissionWindow = () => {
             >
               Submit
             </button>
-            <Dialog
+            <AlertDialog
               open={isSubmitDialogOpen}
               onOpenChange={setIsSubmitDialogOpen}
             >
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Saving response to server</DialogTitle>
-                  <DialogDescription>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Saving response to server</AlertDialogTitle>
+                  <AlertDialogDescription>
                     This action cannot be undone. how ever you can submit
                     another response!
-                  </DialogDescription>
+                  </AlertDialogDescription>
                   <div className="w-full h-36 mt-6 flex items-center justify-center">
                     <img
                       src={savingLogo}
@@ -166,9 +166,9 @@ const FormSubmissionWindow = () => {
                       className="w-full h-full object-contain object-center"
                     />
                   </div>
-                </DialogHeader>
-              </DialogContent>
-            </Dialog>
+                </AlertDialogHeader>
+              </AlertDialogContent>
+            </AlertDialog>
             <button className="text-base text-purple-500 font-sans font-medium select-none">
               Clear form
             </button>

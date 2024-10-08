@@ -38,7 +38,7 @@ export const register = async (data: Data) => {
 export const createForm = async (formId: string, data: Form) => {
   try {
     const response = await API.post("/form/create", { formId, data });
-    return response.data;
+    return response;
   } catch (error) {
     console.error(error);
     throw error;
@@ -73,4 +73,14 @@ export const submitForm = async (data: Response) => {
     console.error(error);
     throw error;
   }
-}
+};
+
+export const getResponses = async (formId: string) => {
+  try {
+    const response = await API.get(`/response/${formId}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
