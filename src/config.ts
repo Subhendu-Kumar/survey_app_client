@@ -28,8 +28,8 @@ export interface SignInResponse {
 }
 
 export interface Option {
-  option_id: string;
-  title: string;
+  id: string;
+  value: string;
 }
 export interface Question {
   id?: number;

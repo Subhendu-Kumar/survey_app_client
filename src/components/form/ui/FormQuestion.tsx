@@ -54,16 +54,19 @@ const FormQuestion: FC<FormQuestionProps> = ({
   // };
 
   const handleOptionChange = (index: number, value: string) => {
-    const newOptions = [...(question.options || [])]; // Access options from the question object
-    newOptions[index] = value; // Update the option at the given index
-    onChange({ ...question, options: newOptions }); // Pass updated question with new options to parent
+    const newOptions = [...(question.options || [])];
+    newOptions[index] = { ...newOptions[index], value: value };
+    onChange({ ...question, options: newOptions });
   };
 
   // const addOption = () => {
   //   setOptions((prev: string[]) => [...prev, DEFAULT_OPTION_TITLE]);
   // };
   const addOption = () => {
-    const newOptions = [...(question.options || []), DEFAULT_OPTION_TITLE];
+    const newOptions = [
+      ...(question.options || []),
+      { id: Date.now().toString(), value: DEFAULT_OPTION_TITLE }
+    ];
     onChange({ ...question, options: newOptions });
   };
 
@@ -129,7 +132,7 @@ const FormQuestion: FC<FormQuestionProps> = ({
         <div className="w-full h-auto mt-4 flex flex-col items-start justify-start gap-2">
           {(question.options || []).map((option, index) => (
             <div
-              key={index}
+              key={option.id}
               className="w-full h-auto flex items-center justify-between gap-2"
             >
               <div className="flex items-center justify-start gap-2 w-[90%]">
@@ -139,7 +142,7 @@ const FormQuestion: FC<FormQuestionProps> = ({
                   className={`w-full h-auto bg-transparent outline-none ${
                     isEditable && "hover:border-b hover:border-gray-500"
                   }  px-3 py-2`}
-                  value={option}
+                  value={option.value}
                   onChange={(e) => handleOptionChange(index, e.target.value)}
                 />
               </div>
