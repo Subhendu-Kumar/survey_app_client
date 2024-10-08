@@ -79,7 +79,7 @@ const Home = ({ user }: HomeProps) => {
           </button>
         </Link>
       </div>
-      <div className="w-full h-auto px-40 pt-10">
+      <div className="w-full h-auto sm:px-40 px-4 pt-10">
         <div className="w-full h-auto flex items-center justify-between">
           <h1 className="text-xl text-black font-sans font-medium">
             Recent Forms
@@ -96,7 +96,10 @@ const Home = ({ user }: HomeProps) => {
             </Select>
             <TooltipProvider>
               <Tooltip>
-                <TooltipTrigger onClick={() => setIsListView((prev) => !prev)}>
+                <TooltipTrigger
+                  onClick={() => setIsListView((prev) => !prev)}
+                  className="max-sm:hidden"
+                >
                   {isListView ? (
                     <CgMenuCheese className="text-4xl" />
                   ) : (
@@ -114,13 +117,13 @@ const Home = ({ user }: HomeProps) => {
           {isLoading ? (
             isListView ? (
               <div className="w-full h-auto flex flex-col items-center justify-center gap-3">
-                {[...Array(5)].map((_, idx) => {
+                {[...Array(6)].map((_, idx) => {
                   return <ListViewSkeleton key={idx} />;
                 })}
               </div>
             ) : (
-              <div className="w-full h-auto grid grid-cols-3 gap-3">
-                {[...Array(5)].map((_, idx) => {
+              <div className="w-full h-auto grid md:grid-cols-3 grid-cols-1 gap-3">
+                {[...Array(6)].map((_, idx) => {
                   return <CardViewSkeleton key={idx} />;
                 })}
               </div>
@@ -162,7 +165,7 @@ const Home = ({ user }: HomeProps) => {
               })}
             </div>
           ) : (
-            <div className="w-full h-auto grid grid-cols-3 gap-3">
+            <div className="w-full h-auto grid md:grid-cols-3 grid-cols-1 gap-3">
               {[...formsData].reverse().map((data, idx) => {
                 return (
                   <Card

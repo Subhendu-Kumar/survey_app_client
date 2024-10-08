@@ -105,10 +105,13 @@ const Navbar = ({ user, setUser }: UserProps) => {
   }, [isLoginDialogOpen, isSignupDialogOpen, resetLoginForm, resetSignupForm]);
 
   return (
-    <div className="w-full h-16 bg-gray-200 px-10 flex items-center justify-between">
-      <Link to={"/"} className="flex items-center justify-center gap-3">
-        <FaSheetPlastic className="text-3xl text-purple-900" />
-        <p className="text-2xl font-sans font-normal">Survey Forms</p>
+    <div className="w-full h-16 bg-purple-50 border-b border-gray-300 sm:px-10 px-4 flex items-center justify-between">
+      <Link
+        to={"/"}
+        className="flex items-center justify-center sm:gap-3 gap-1"
+      >
+        <FaSheetPlastic className="text-3xl text-purple-600" />
+        <p className="text-2xl font-sans font-semibold">Survey Forms</p>
       </Link>
       {user ? (
         <div>

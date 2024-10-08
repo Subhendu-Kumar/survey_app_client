@@ -103,7 +103,7 @@ const FormSubmissionWindow = () => {
   };
 
   return (
-    <div className="w-full min-h-screen py-10 px-96">
+    <div className="w-full min-h-screen py-10 md:px-96 px-4">
       <div className="w-full h-auto flex flex-col items-center justify-center gap-6">
         <FormAccountSet user={user} setUser={setUser} />
         {submitSuccess ? (
@@ -176,7 +176,7 @@ const FormSubmissionWindow = () => {
         )}
       </div>
       <div className="w-full h-auto mt-10 flex flex-col items-center justify-center gap-6">
-        <p className="text-sm font-sans font-normal">
+        <p className="text-sm text-center font-sans font-normal">
           This content is neither created nor endorsed by{" "}
           <span className="text-purple-500">Survey Forms</span>.{" "}
           <span className="hover:underline select-none">Report Abuse</span> -{" "}
