@@ -52,7 +52,7 @@ const FormSubmissionQuestion = ({ question,  onInputChange }: { question: Questi
           {options?.map((option, idx) => {
             return (
               <div className="flex items-center space-x-2" key={idx}>
-                <RadioGroupItem value={option.title} id={option.option_id} />
+                <RadioGroupItem value={option.title!} id={option.option_id} />
                 <Label htmlFor={option.option_id}>{option.title}</Label>
               </div>
             );

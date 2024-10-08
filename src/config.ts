@@ -3,9 +3,9 @@ export const USER_DATA_KEY = "userData";
 export const DEFAULT_OPTION_TITLE = "Option";
 export const DEFAULT_QUESTION_TITLE = "Question";
 export const DEFAULT_FORM_TITLE = "Untitled Form";
-export const BASE_URL = "https://survey-app-server-three.vercel.app/api/v1";
 export const DEFAULT_QUESTION_TYPE: QuestionType = "short_text";
 export const DEFAULT_FORM_DESCRIPTION = "Add a description to your form";
+export const BASE_URL = "https://survey-app-server-three.vercel.app/api/v1";
 
 export type QuestionType = "short_text" | "paragraph" | "multiple_choice" | "";
 
