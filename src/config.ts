@@ -5,7 +5,7 @@ export const DEFAULT_QUESTION_TITLE = "Question";
 export const DEFAULT_FORM_TITLE = "Untitled Form";
 export const DEFAULT_QUESTION_TYPE: QuestionType = "short_text";
 export const DEFAULT_FORM_DESCRIPTION = "Add a description to your form";
-export const BASE_URL = "https://survey-app-server-three.vercel.app/api/v1";
+export const BASE_URL = "http://localhost:5000/api/v1";
 
 export type QuestionType = "short_text" | "paragraph" | "multiple_choice" | "";
 

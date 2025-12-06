@@ -65,7 +65,7 @@ const FormQuestion: FC<FormQuestionProps> = ({
   const addOption = () => {
     const newOptions = [
       ...(question.options || []),
-      { id: Date.now().toString(), value: DEFAULT_OPTION_TITLE }
+      { id: Date.now().toString(), value: DEFAULT_OPTION_TITLE },
     ];
     onChange({ ...question, options: newOptions });
   };
